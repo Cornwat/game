@@ -1,0 +1,49 @@
+import random
+
+def choose_word():
+    words = ["python", "javascript", "java", "programming", "developer", "hangman", "coding"]
+    return random.choice(words)
+
+def display_word(word, guessed_letters):
+    display = ""
+    for letter in word:
+        if letter in guessed_letters:
+            display += letter
+        else:
+            display += "_"
+    return display
+
+def hangman():
+    word_to_guess = choose_word()
+    guessed_letters = []
+    attempts = 6
+
+    print("Добро пожаловать в игру Виселица!")
+    
+    while attempts > 0:
+        print("\nСлово:", display_word(word_to_guess, guessed_letters))
+        print("Оставшиеся попытки:", attempts)
+        
+        guess = input("Введите букву: ").lower()
+
+        if len(guess) == 1 and guess.isalpha():
+            if guess in guessed_letters:
+                print("Вы уже вводили эту букву. Попробуйте другую.")
+            elif guess in word_to_guess:
+                print("Отлично! Эта буква есть в слове.")
+                guessed_letters.append(guess)
+            else:
+                print("Увы, такой буквы в слове нет.")
+                attempts -= 1
+        else:
+            print("Пожалуйста, введите одну букву.")
+
+        if all(letter in guessed_letters for letter in word_to_guess):
+            print("\nПоздравляем! Вы угадали слово:", word_to_guess)
+            break
+
+    if attempts == 0:
+        print("\nИгра окончена. Вы проиграли. Загаданное слово было:", word_to_guess)
+
+if __name__ == "__main__":
+    hangman()
