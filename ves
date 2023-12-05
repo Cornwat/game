@@ -13,6 +13,15 @@ def display_word(word, guessed_letters):
             display += "_"
     return display
 
+def is_game_over(word, guessed_letters, attempts):
+    if all(letter in guessed_letters for letter in word):
+        print("\nПоздравляем! Вы угадали слово:", word)
+        return True
+    elif attempts == 0:
+        print("\nИгра окончена. Вы проиграли. Загаданное слово было:", word)
+        return True
+    return False
+
 def hangman():
     word_to_guess = choose_word()
     guessed_letters = []
@@ -20,7 +29,7 @@ def hangman():
 
     print("Добро пожаловать в игру Виселица!")
     
-    while attempts > 0:
+    while not is_game_over(word_to_guess, guessed_letters, attempts):
         print("\nСлово:", display_word(word_to_guess, guessed_letters))
         print("Оставшиеся попытки:", attempts)
         
@@ -36,14 +45,7 @@ def hangman():
                 print("Увы, такой буквы в слове нет.")
                 attempts -= 1
         else:
-            print("Пожалуйста, введите одну букву.")
-
-        if all(letter in guessed_letters for letter in word_to_guess):
-            print("\nПоздравляем! Вы угадали слово:", word_to_guess)
-            break
-
-    if attempts == 0:
-        print("\nИгра окончена. Вы проиграли. Загаданное слово было:", word_to_guess)
+            print("Пожалуйста, введите только одну букву.")
 
 if __name__ == "__main__":
     hangman()
