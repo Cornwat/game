@@ -1,15 +1,1 @@
 
-        if len(guess) == 1 and guess.isalpha():
-            if guess in guessed_letters:
-                print("Вы уже вводили эту букву. Попробуйте другую.")
-            elif guess in word_to_guess:
-                print("Отлично! Эта буква есть в слове.")
-                guessed_letters.append(guess)
-            else:
-                print("Увы, такой буквы в слове нет.")
-                attempts -= 1
-        else:
-            print("Пожалуйста, введите только одну букву.")
-
-if __name__ == "__main__":
-    hangman()
